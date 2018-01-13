@@ -1,0 +1,19 @@
+group 'com.raj.cronparser'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin:'application'
+
+sourceCompatibility = 1.8
+
+mainClassName = "com.raj.cronparser.Application"
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12',
+            'org.assertj:assertj-core:3.8.0'
+}
