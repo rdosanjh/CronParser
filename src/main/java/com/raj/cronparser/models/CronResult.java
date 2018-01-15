@@ -6,15 +6,13 @@ public class CronResult {
     private int[] dayOfMonth;
     private int[] month;
     private int[] dayOfWeek;
-    private String command;
 
-    public CronResult(int[] minute, int[] hour, int[] dayOfMonth, int[] month, int[] dayOfWeek, String command) {
+    public CronResult(int[] minute, int[] hour, int[] dayOfMonth, int[] month, int[] dayOfWeek) {
         this.minute = minute;
         this.hour = hour;
         this.dayOfMonth = dayOfMonth;
         this.month = month;
         this.dayOfWeek = dayOfWeek;
-        this.command = command;
     }
 
     public int[] getMinute() {
@@ -57,9 +55,6 @@ public class CronResult {
 //        this.dayOfWeek = dayOfWeek;
 //    }
 
-    public String getCommand() {
-        return command;
-    }
 
 //    public void setCommand(String command) {
 //        this.command = command;

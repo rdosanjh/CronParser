@@ -42,24 +42,44 @@ public class CronParserTest {
     @Test
     public void testAllHour(){
         int[] expected = IntStream.iterate(0, n -> n + 1).limit(24).toArray();
-        assertThat(parser.parse("* * * * * ?").getHour())
+        assertThat(parser.parse("* * * * *").getHour())
                 .containsExactly(expected);
-        assertThat(parser.parse("* */1 * * * ?").getHour())
+        assertThat(parser.parse("* */1 * * *").getHour())
                 .containsExactly(expected);
     }
 
     @Test
     public void parseSelectDaysOfMonth(){
-        assertThat(parser.parse("* * 1 * * * ?").getDayOfMonth())
+        assertThat(parser.parse("* * 1 * * *").getDayOfMonth())
                 .containsExactly(1);
-        assertThat(parser.parse("* * 1,15 * * * ?").getDayOfMonth())
+        assertThat(parser.parse("* * 1,15 * * *").getDayOfMonth())
                 .containsExactly(1,15);
     }
 
     @Test
-    public void parseCommand(){
-        assertThat(parser.parse("* * 1 * * ?").getCommand())
-                .isEqualTo("?");
+    public void parseAllMonths() {
+        int[] expected = IntStream.iterate(1, n -> n + 1).limit(12).toArray();
+
+        assertThat(parser.parse("* * * * * *").getMonth())
+                .containsExactly(expected);
     }
 
+    @Test
+    public void parseAllDaysOfWeek() {
+        int[] expected = IntStream.iterate(1, n -> n + 1).limit(7).toArray();
+        assertThat(parser.parse("* * * * * *").getDayOfWeek())
+                .containsExactly(expected);
+    }
+
+    @Test
+    public void parserRangeDaysOfWeek() {
+        int[] expected = IntStream.iterate(1, n -> n + 1).limit(5).toArray();
+        assertThat(parser.parse("* * * * 1-5").getDayOfWeek())
+                .containsExactly(expected);
+    }
+
+    @Test
+    public void testComplexCase(){
+        parser.parse("*/15 0 1,15 * 1-5");
+    }
 }
